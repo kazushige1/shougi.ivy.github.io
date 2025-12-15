@@ -1,0 +1,123 @@
+/* 全体背景：金色の薄いグラデーション */
+body {
+  font-family: "M PLUS 1p", sans-serif;
+  margin: 0;
+  background: linear-gradient(#fff9e6, #f7e9b1);
+  color: #3a2c09;
+}
+
+/************************************
+  ヘッダー：濃紺 × 金ライン
+*************************************/
+header {
+  background: linear-gradient(135deg, #0f1a33, #1d2f55);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 6px solid #d4af37; /* 金ライン */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
+
+/* ナビゲーション */
+nav {
+  margin-top: 12px;
+}
+
+nav a {
+  color: #f8e8a0;
+  margin: 0 14px;
+  text-decoration: none;
+  font-weight: bold;
+  padding-bottom: 3px;
+  border-bottom: 2px solid transparent;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  border-bottom: 2px solid #f8e8a0;
+}
+
+/************************************
+  メインコンテンツ
+*************************************/
+main {
+  max-width: 950px;
+  margin: 60px auto;
+  padding: 0 26px;
+}
+
+section {
+  margin-bottom: 70px;
+}
+
+/* セクション見出し */
+h2 {
+  border-left: 10px solid #d4af37; /* 金の帯 */
+  padding-left: 14px;
+  font-size: 1.6rem;
+  margin-bottom: 16px;
+}
+
+/************************************
+  カード（黄金枠＋上品な影）
+*************************************/
+.card {
+  background: #fffdf5;
+  border-left: 5px solid #d4af37;
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 26px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.22);
+}
+
+/************************************
+  まとめ枠（柔らかい金背景）
+*************************************/
+.summary {
+  background: linear-gradient(#fff8d8, #f6e8b0);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  border: 2px solid #d4af37;
+}
+
+/************************************
+  フッター
+*************************************/
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #1d2f55;
+  color: #f5e5a0;
+  margin-top: 70px;
+  border-top: 6px solid #d4af37;
+}
+/* 初期状態（非表示） */
+.card {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* 表示状態 */
+.card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* 現在ページのナビ */
+nav a.active {
+  border-bottom: 2px solid #f8e8a0;
+}

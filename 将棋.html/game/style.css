@@ -1,0 +1,257 @@
+:root { --cell: 56px }
+
+/************************************
+  共通レイアウト・ヘッダー・フッター
+*************************************/
+body {
+    font-family: "M PLUS 1p", sans-serif;
+    margin: 0;
+    background: linear-gradient(180deg, #fff8e1 0%, #fdf2d1 100%);
+    color: #333;
+}
+
+header {
+    background: linear-gradient(90deg, #e1c523, #ffb700);
+    color: #000000;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    border-bottom: 2px solid #ffffff;
+}
+
+nav a {
+    color: #ffffff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #fff;
+    background-color: rgba(255,215,0,0.4);
+    box-shadow: 0 0 8px rgba(255,215,0,0.6);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #fff3b0, #ffe066);
+    margin-top: 50px;
+    color: #333;
+    border-top: 2px solid #b8860b;
+}
+
+/************************************
+  トップページ用（hero）
+*************************************/
+.hero {
+    max-width: 600px;
+    margin: 30px auto;
+    background: linear-gradient(145deg, #fff8dc, #fff2b8);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    text-align: center;
+    border: 2px solid #ffd700;
+}
+
+/************************************
+  ゲーム画面レイアウト
+*************************************/
+main {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.game-area {
+    max-width: 800px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+/************************************
+  将棋盤
+*************************************/
+#board-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+#board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 2px solid #b8860b;
+  background: linear-gradient(135deg, #f2d08c, #f9e4a8);
+  box-shadow: inset 0 0 8px rgba(255,215,0,0.3);
+}
+
+.cell {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: #fff7e6;
+  border:1px solid rgba(184,134,11,0.3);
+  position:relative;
+  user-select:none;
+  aspect-ratio: 1 / 1;
+  transition: background 0.2s ease;
+}
+
+.cell.dark { background: #f5e3c0 }
+
+.cell:hover {
+  background: rgba(255,215,0,0.15);
+}
+
+/************************************
+  駒
+*************************************/
+.piece {
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  font-family: 'KouzanBrushFont','AoyagiKouzanFont','Hannari','Yu Mincho','SimHei',serif;
+  color: #222;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+.piece.selected {
+  outline:3px solid rgba(255,215,0,0.5);
+}
+
+.piece.rotated {
+  transform: rotate(180deg);
+}
+
+.piece.selected-hand {
+  outline: 3px solid #ffd700;
+  outline-offset: -3px;
+  box-shadow: 0 0 6px rgba(255,215,0,0.4);
+}
+
+.hint {
+  position:absolute;
+  inset:4px;
+  border-radius:4px;
+  background:rgba(30,144,255,0.15);
+  pointer-events:none;
+}
+
+/************************************
+  駒台（PCレイアウト）
+*************************************/
+.koma-dai-top-left,
+.koma-dai-bottom-right {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 2px solid #b8860b;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #fff8dc, #fff2b8);
+    padding: 5px;
+    display:flex;
+    flex-wrap: wrap;
+    gap:4px;
+    justify-content: center;
+    align-items: flex-start; /* ← ズレ再発防止の核心 */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.koma-dai-top-left {
+    top: 0;
+    left: calc(-1 * 120px - 28px);
+}
+
+.koma-dai-bottom-right {
+    bottom: 0;
+    right: calc(-1 * 120px - 28px);
+}
+
+/************************************
+  ボタン・コントロール
+*************************************/
+button {
+  padding:6px 10px;
+  border-radius:8px;
+  border:1px solid #b8860b;
+  background: linear-gradient(90deg, #ffd700, #ffb700);
+  color: #222;
+  font-weight: bold;
+  cursor:pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #ffec8b, #ffdf50);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+#controls {
+  margin-top: 12px;
+}
+
+/************************************
+  スマホ対応（レスポンシブ）
+*************************************/
+@media (max-width: 768px) {
+
+  #board {
+      width: 90%;
+      max-width: 350px;
+      margin: auto;
+  }
+
+  .koma-dai-top-left,
+  .koma-dai-bottom-right {
+      position: static;
+      width: 90%;
+      max-width: 260px;
+      height: 40px ;
+      margin: 50px auto;
+  }
+
+  #board-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .game-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  #controls {
+      width: 90%;
+      max-width: 300px;
+      margin: 20px auto 0;
+      text-align: center;
+  }
+}
+
+/************************************
+  極小スマホ対応
+*************************************/
+@media (max-width: 420px) {
+    #board {
+        max-width: 280px;
+    }
+    .koma-dai-top-left,
+    .koma-dai-bottom-right {
+        max-width: 180px;
+    }
+}
