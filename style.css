@@ -1,12 +1,25 @@
+/* =========================
+    全体・全画面レイアウト
+   ========================= */
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: "M PLUS 1p", sans-serif;
     margin: 0;
+    /* dvhを使用してスマホのブラウザバーを含めた全画面にフィットさせる */
+    min-height: 100dvh;
     background: linear-gradient(#fff8e1, #fbe4a1);
     color: #4a3c00;
+
+    /* ヘッダー・メイン・フッターを縦に並べる */
+    display: flex;
+    flex-direction: column;
 }
 
 /* =========================
-   ヘッダー
+    ヘッダー
 ========================= */
 
 header {
@@ -16,6 +29,7 @@ header {
     text-align: center;
     box-shadow: 0 3px 15px rgba(0,0,0,0.2);
     border-bottom: 3px solid #fff4c1;
+    flex-shrink: 0; /* 高さを維持 */
 }
 
 header h1 {
@@ -26,7 +40,7 @@ header h1 {
 }
 
 /* =========================
-   ナビゲーション
+    ナビゲーション
 ========================= */
 
 nav {
@@ -48,12 +62,22 @@ nav a:hover {
 }
 
 /* =========================
-   ヒーローコンテンツ
+    メイン（ここが全画面の肝）
 ========================= */
 
+main {
+    flex: 1; /* 余った画面スペースをすべて使う */
+    display: flex;
+    align-items: center; /* 上下中央 */
+    justify-content: center; /* 左右中央 */
+    padding: 20px;
+}
+
 .hero {
+    width: 100%;
     max-width: 650px;
-    margin: 60px auto;
+    /* marginはFlexboxが制御するため、上下は0に */
+    margin: 0 auto;
     background: linear-gradient(#fff, #fffaf0);
     padding: 32px;
     border-radius: 14px;
@@ -74,7 +98,7 @@ nav a:hover {
 }
 
 /* =========================
-   黄金ボタン
+    黄金ボタン
 ========================= */
 
 .button {
@@ -103,7 +127,7 @@ nav a:hover {
 }
 
 /* =========================
-   フッター
+    フッター
 ========================= */
 
 footer {
@@ -111,6 +135,15 @@ footer {
     padding: 20px;
     background: #f2e4b3;
     color: #5c4b00;
-    margin-top: 60px;
     border-top: 2px solid #d5b100;
+    flex-shrink: 0; /* 高さを維持 */
+}
+
+/* =========================
+    スマホ用の調整（文字溢れ防止）
+========================= */
+@media (max-width: 480px) {
+    header h1 { font-size: 24px; }
+    nav a { margin: 0 5px; font-size: 14px; }
+    .hero { padding: 20px; }
 }
