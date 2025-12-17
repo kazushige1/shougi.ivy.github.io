@@ -293,25 +293,65 @@ button:hover {
 
 /* 極小スマホ（iPhone SEなど）への最適化 */
 /* 極小スマホ（横幅が非常に狭い端末）への最適化 */
+/************************************
+  極小スマホ（画面幅375px以下）最適化
+*************************************/
 @media (max-width: 375px) {
+    /* 1. 全体コンテナの余白を最小化 */
     main {
-        padding: 0 5px; /* 左右の余白をさらに削る */
+        padding: 0 4px; /* 左右の余白を4pxまで削る */
+        overflow-x: hidden; /* 横スクロールを物理的に禁止 */
     }
 
+    .game-area {
+        margin: 5px auto;
+        width: 100%;
+    }
+
+    #board-wrapper {
+        gap: 8px; /* 駒台と盤面の隙間を少し詰める */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* 2. 盤面：画面幅から左右余白分を引いた「最大幅」に設定 */
     #board {
-        /* 320px固定ではなく、画面幅から少し引いた値（95vwなど）にする */
-        max-width: 95vw; 
-        aspect-ratio: 9 / 9; /* 歪みを防ぐため正方形に固定 */
+        width: calc(100vw - 8px); /* 画面幅から左右4pxずつの余白を引く */
+        max-width: 100%;
+        margin: 0 auto;
+        border-width: 1px; /* 枠線を少し細くして圧迫感を減らす */
+        box-sizing: border-box; /* 枠線を幅の中に含める（重要！） */
     }
 
+    /* 3. 駒：マスのサイズに合わせてフォントを自動縮小 */
     .piece {
-        /* フォントサイズをvw（画面幅単位）にすると、画面に合わせて自動縮小します */
+        /* 1マスが画面幅の約1/9なので、5.5%くらいがちょうど良い */
         font-size: 5.5vw; 
+        line-height: 1;
     }
 
+    /* 4. 駒台：盤面と同じ幅にして突き出しを防止 */
     .koma-dai-top-left,
     .koma-dai-bottom-right {
-        width: 95vw; /* 駒台も画面幅いっぱいに */
-        min-height: 40px;
+        position: static; /* 絶対配置を完全に解除 */
+        width: calc(100vw - 8px); 
+        min-height: 44px; /* 最低限のタップ領域を確保 */
+        padding: 4px;
+        box-sizing: border-box;
+        gap: 2px; /* 駒同士の隙間を詰めて溢れを防止 */
+        border-radius: 4px;
+    }
+
+    /* 5. コントロール（ボタン類） */
+    #controls {
+        font-size: 14px; /* 文字を少し小さく */
+        width: 100%;
+    }
+    
+    button {
+        padding: 8px 12px; /* 指で押しやすいサイズは維持 */
+        font-size: 13px;
     }
 }
