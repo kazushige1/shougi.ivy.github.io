@@ -292,11 +292,26 @@ button:hover {
 }
 
 /* 極小スマホ（iPhone SEなど）への最適化 */
+/* 極小スマホ（横幅が非常に狭い端末）への最適化 */
 @media (max-width: 375px) {
-    #board {
-        max-width: 320px;
+    main {
+        padding: 0 5px; /* 左右の余白をさらに削る */
     }
+
+    #board {
+        /* 320px固定ではなく、画面幅から少し引いた値（95vwなど）にする */
+        max-width: 95vw; 
+        aspect-ratio: 9 / 9; /* 歪みを防ぐため正方形に固定 */
+    }
+
     .piece {
-        font-size: 18px;
+        /* フォントサイズをvw（画面幅単位）にすると、画面に合わせて自動縮小します */
+        font-size: 5.5vw; 
+    }
+
+    .koma-dai-top-left,
+    .koma-dai-bottom-right {
+        width: 95vw; /* 駒台も画面幅いっぱいに */
+        min-height: 40px;
     }
 }
