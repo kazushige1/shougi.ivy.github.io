@@ -294,64 +294,83 @@ button:hover {
 /* 極小スマホ（iPhone SEなど）への最適化 */
 /* 極小スマホ（横幅が非常に狭い端末）への最適化 */
 /************************************
-  極小スマホ（画面幅375px以下）最適化
+/************************************
+  極小スマホ（画面幅375px以下）完全対応
 *************************************/
+/* 1. サイト全体の横揺れを根本から防ぐ */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 @media (max-width: 375px) {
-    /* 1. 全体コンテナの余白を最小化 */
+    /* 2. メインエリアの余白をリセット */
     main {
-        padding: 0 4px; /* 左右の余白を4pxまで削る */
-        overflow-x: hidden; /* 横スクロールを物理的に禁止 */
+        padding: 0 4px; 
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .game-area {
-        margin: 5px auto;
+        margin: 10px auto;
         width: 100%;
     }
 
+    /* 3. 盤面ラッパー：中央寄せを徹底 */
     #board-wrapper {
-        gap: 8px; /* 駒台と盤面の隙間を少し詰める */
+        gap: 10px;
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 
-    /* 2. 盤面：画面幅から左右余白分を引いた「最大幅」に設定 */
+    /* 4. 将棋盤：絶対にはみ出さない幅計算 */
     #board {
-        width: calc(100vw - 8px); /* 画面幅から左右4pxずつの余白を引く */
+        /* 画面幅から左右5pxずつの余裕を持たせる */
+        width: calc(100vw - 10px); 
         max-width: 100%;
         margin: 0 auto;
-        border-width: 1px; /* 枠線を少し細くして圧迫感を減らす */
-        box-sizing: border-box; /* 枠線を幅の中に含める（重要！） */
+        box-sizing: border-box; /* 枠線を内側に含める */
+        border-width: 1px;
     }
 
-    /* 3. 駒：マスのサイズに合わせてフォントを自動縮小 */
+    /* 5. 駒：マスの縮小に合わせてフォントも可変に */
     .piece {
-        /* 1マスが画面幅の約1/9なので、5.5%くらいがちょうど良い */
-        font-size: 5.5vw; 
+        font-size: 5.8vw; /* 画面幅に基づいたサイズ */
         line-height: 1;
     }
 
-    /* 4. 駒台：盤面と同じ幅にして突き出しを防止 */
+    /* 6. 駒台：盤面と同じ幅で揃える */
     .koma-dai-top-left,
     .koma-dai-bottom-right {
-        position: static; /* 絶対配置を完全に解除 */
-        width: calc(100vw - 8px); 
-        min-height: 44px; /* 最低限のタップ領域を確保 */
-        padding: 4px;
+        position: static; 
+        width: calc(100vw - 10px); 
+        min-height: 48px;
+        padding: 5px;
         box-sizing: border-box;
-        gap: 2px; /* 駒同士の隙間を詰めて溢れを防止 */
-        border-radius: 4px;
+        gap: 3px;
+        border-radius: 6px;
     }
 
-    /* 5. コントロール（ボタン類） */
+    /* 7. ボタン類：はみ出し防止 */
     #controls {
-        font-size: 14px; /* 文字を少し小さく */
         width: 100%;
+        font-size: 14px;
+        padding: 0 5px;
+        box-sizing: border-box;
     }
-    
+
     button {
-        padding: 8px 12px; /* 指で押しやすいサイズは維持 */
+        padding: 10px 14px; /* タップしやすさを優先 */
         font-size: 13px;
+    }
+
+    /* タイマーなどのテキストが横に並びすぎないように調整 */
+    #controls > div {
+        margin-bottom: 8px;
     }
 }
