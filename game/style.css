@@ -224,52 +224,79 @@ button:hover {
 /************************************
   スマホ対応（レスポンシブ）
 *************************************/
-@media (max-width: 768px) {
-
-  #board {
-      width: 90%;
-      max-width: 350px;
-      margin: auto;
-  }
-
-  .koma-dai-top-left,
-  .koma-dai-bottom-right {
-      position: static;
-      width: 90%;
-      max-width: 260px;
-      height: 40px ;
-      margin: 50px auto;
-  }
-
-  #board-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-
-  .game-area {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-  }
-
-  #controls {
-      width: 90%;
-      max-width: 300px;
-      margin: 20px auto 0;
-      text-align: center;
-  }
+/* 全体的なズレ防止 */
+* {
+    box-sizing: border-box;
 }
 
 /************************************
-  極小スマホ対応
+  スマホ対応（レスポンシブ）修正版
 *************************************/
-@media (max-width: 420px) {
-    #board {
-        max-width: 280px;
+@media (max-width: 768px) {
+    main {
+        padding: 0 10px; /* 余白を最小限に */
     }
+
+    .game-area {
+        width: 100%;
+        margin: 10px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* 中央寄せ */
+    }
+
+    #board-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* 駒台と盤面の間の溝 */
+        width: 100%;
+        max-width: 400px; /* スマホでの最大幅 */
+    }
+
+    #board {
+        width: 100%; /* 横幅いっぱいに広げる */
+        max-width: 360px; /* 大きすぎ防止 */
+        margin: 0 auto;
+        aspect-ratio: 9 / 9.5; /* 将棋盤らしい少し縦長の比率 */
+    }
+
+    /* スマホ時の駒台：盤面の上下に配置 */
     .koma-dai-top-left,
     .koma-dai-bottom-right {
-        max-width: 180px;
+        position: static; /* absoluteを解除 */
+        width: 90%;
+        height: auto;
+        min-height: 50px;
+        margin: 5px auto;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 8px;
+        background: linear-gradient(145deg, #fff8dc, #fff2b8);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* 後手駒台を上に、先手駒台を下に配置するための順序調整 */
+    .koma-dai-top-left {
+        order: -1; /* 盤面より上に表示 */
+    }
+
+    .koma-dai-bottom-right {
+        order: 1; /* 盤面より下に表示 */
+    }
+
+    .piece {
+        font-size: 20px; /* スマホでは駒を少し小さく */
+    }
+}
+
+/* 極小スマホ（iPhone SEなど）への最適化 */
+@media (max-width: 375px) {
+    #board {
+        max-width: 320px;
+    }
+    .piece {
+        font-size: 18px;
     }
 }
