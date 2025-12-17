@@ -202,6 +202,24 @@ button:hover {
 #controls {
   margin-top: 12px;
 }
+.result-overlay {
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: bold;
+  background: white;
+  border: 3px solid black;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.mt-12 {
+  margin-top: 12px;
+}
+
 
 /************************************
   スマホ対応（レスポンシブ）
